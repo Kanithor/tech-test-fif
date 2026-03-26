@@ -46,6 +46,7 @@ jobs:
         REPO_PATH="${{ env.GAR_LOCATION }}-docker.pkg.dev/${{ env.PROJECT_ID }}/${{ env.REPOSITORY }}/${{ env.IMAGE }}"
         
         docker build -t "$REPO_PATH:$TAG" -t "$REPO_PATH:latest" ./cloud-run-subscriber
+        docker push "$REPO_PATH:$TAG"
         docker push "$REPO_PATH:latest"
     
     - name: Deploy to Cloud Run
