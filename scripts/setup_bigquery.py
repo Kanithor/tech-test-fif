@@ -57,6 +57,10 @@ SCHEMA = [
         "anno", "INTEGER", mode="REQUIRED",
         description="Año de la venta (ej. 2022)",
     ),
+    bigquery.SchemaField(
+        "fecha", "DATE", mode="REQUIRED",
+        description="Primer día del mes de la venta (YYYY-MM-01)",
+    ),
 
     # Métrica
     bigquery.SchemaField(

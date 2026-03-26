@@ -6,8 +6,8 @@ from __future__ import annotations
 
 import re
 from dataclasses import dataclass, field
-from datetime import datetime
 from typing import ClassVar
+from datetime import date, datetime 
 
 MESES: dict[str, int] = {
     "enero": 1, "febrero": 2, "marzo": 3, "abril": 4,
@@ -35,6 +35,7 @@ class VentaRecord:
     mes_num: int       # 1
     anno: int          # 2022
     mes_og: str
+    fecha: date
 
     # ── Transformación 2: codificación ordinal de región ─────────────────
     region_code: int   # 0-based encoding de la región
@@ -70,6 +71,7 @@ class VentaRecord:
 
         mes_raw = cls._limpiar_str(raw.get("mes", ""), "mes")
         mes_nombre, mes_num, anno = cls._parsear_mes(mes_raw)
+        fecha = date(anno, mes_num, 1)
 
         ventas = cls._validar_ventas(raw.get("ventas_mensuales"))
         region_code = cls._codificar_region(region)
@@ -80,6 +82,7 @@ class VentaRecord:
             mes_nombre=mes_nombre,
             mes_num=mes_num,
             anno=anno,
+            fecha=fecha,
             region_code=region_code,
             ventas_mensuales=ventas,
             mes_og=mes_raw
@@ -152,6 +155,7 @@ class VentaRecord:
             "mes_nombre":        self.mes_nombre,
             "mes_num":           self.mes_num,
             "mes_og":            self.mes_og,
+            "fecha":            self.fecha.isoformat(),
             "anno":              self.anno,
             "ventas_mensuales":  self.ventas_mensuales,
             "procesado_en":      self.procesado_en,
