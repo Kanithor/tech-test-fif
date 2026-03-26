@@ -43,6 +43,12 @@ variable "container_image" {
   default     = "us-central1-docker.pkg.dev/tech-test-fif/ventas-repo/ventas-subscriber:latest"
 }
 
+variable "container_image_tag" {
+  description = "The docker image tag to deploy (e.g. git commit sha)"
+  type        = string
+  default     = "latest"
+}
+
 variable "topic_name" {
   description = "Nombre del tópico Pub/Sub"
   type        = string
@@ -152,7 +158,7 @@ resource "google_cloud_run_v2_service" "ventas_subscriber" {
     service_account = google_service_account.cloud_run_sa.email
 
     containers {
-      image = var.container_image
+      image = "us-central1-docker.pkg.dev/${var.project_id}/ventas-repo/ventas-subscriber:${var.container_image_tag}"
 
       env {
         name  = "GCP_PROJECT_ID"
