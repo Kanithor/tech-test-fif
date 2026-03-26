@@ -50,7 +50,7 @@ SCHEMA = [
         description="Número del mes 1-12",
     ),
     bigquery.SchemaField(
-        "mes_og", "INTEGER", mode="REQUIRED",
+        "mes_og", "string", mode="REQUIRED",
         description="Nombre del mes y Año",
     ),
     bigquery.SchemaField(
