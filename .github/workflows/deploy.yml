@@ -28,8 +28,7 @@ jobs:
       uses: 'google-github-actions/auth@v2'
       with:
         token_format: 'access_token'
-        # Replace PROJECT_NUMBER with your 12-digit GCP Project Number
-        workload_identity_provider: 'projects/PROJECT_NUMBER/locations/global/workloadIdentityPools/terraform-pool/providers/github-provider'
+        workload_identity_provider: 'projects/625428203762/locations/global/workloadIdentityPools/terraform-pool/providers/github-provider'
         service_account: 'sa-github-actions-gar@tech-test-fif.iam.gserviceaccount.com'
 
     # 2. Log in to Docker using the WIF Access Token
