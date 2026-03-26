@@ -22,7 +22,7 @@ class VentaRecord:
     Registro de venta limpio y transformado, listo para persistencia.
 
     Transformaciones aplicadas:
-      1. Separación de 'mes' → (mes_nombre, mes_num, anno)
+      1. Separación de 'mes' → (mes_nombre, mes_num, anno y mes_og)
       2. Codificación label-encoding de región → region_code
     """
 
@@ -34,6 +34,7 @@ class VentaRecord:
     mes_nombre: str    # "Enero"
     mes_num: int       # 1
     anno: int          # 2022
+    mes_og: str
 
     # ── Transformación 2: codificación ordinal de región ─────────────────
     region_code: int   # 0-based encoding de la región
@@ -81,6 +82,7 @@ class VentaRecord:
             anno=anno,
             region_code=region_code,
             ventas_mensuales=ventas,
+            mes_og=mes_raw
         )
 
     # ── Helpers privados ─────────────────────────────────────────────────
@@ -149,6 +151,7 @@ class VentaRecord:
             "region_code":       self.region_code,
             "mes_nombre":        self.mes_nombre,
             "mes_num":           self.mes_num,
+            "mes_og":            self.mes_og,
             "anno":              self.anno,
             "ventas_mensuales":  self.ventas_mensuales,
             "procesado_en":      self.procesado_en,
