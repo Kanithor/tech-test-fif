@@ -48,3 +48,10 @@ jobs:
         docker build -t "$REPO_PATH:$TAG" -t "$REPO_PATH:latest" ./cloud-run-subscriber
         docker push "$REPO_PATH:$TAG"
         docker push "$REPO_PATH:latest"
+    
+    - name: Deploy to Cloud Run
+      uses: 'google-github-actions/deploy-cloudrun@v2'
+      with:
+        service: 'ventas-subscriber'
+        region: 'us-central1'
+        image: 'us-central1-docker.pkg.dev/tech-test-fif/ventas-repo/ventas-subscriber:latest'
