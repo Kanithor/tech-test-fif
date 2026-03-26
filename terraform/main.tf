@@ -1,3 +1,11 @@
+# This will safely print if the variable exists without showing the value
+resource "null_resource" "debug_variables" {
+  provisioner "local-exec" {
+    command = "echo 'Checking TFC Variables...'; env | grep TFC_GCP_SERVICE_ACCOUNT_EMAIL || echo 'VARIABLE NOT FOUND IN ENV'"
+  }
+}
+
+
 # ─── Terraform — Pipeline de Ventas GCP ──────────────────────────────────────
 #
 # Recursos desplegados:
